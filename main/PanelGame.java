@@ -25,7 +25,7 @@ public class PanelGame extends JPanel {
     public PanelGame() {
         this.setFocusable(true);
         this.setLayout(null);
-        mouseInput = new MouseInput();
+        mouseInput = new MouseInput(this);
         addKeyListener(new KeyboardInput(this));
         addMouseListener(mouseInput); 
         addMouseMotionListener(mouseInput);
@@ -71,7 +71,7 @@ public class PanelGame extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(imageBg, 0, 0, getWidth(), getHeight(), this);
-        g.drawImage(imageAc,100+xDelta, 310+yDelta, getWidth(), getHeight(), this);
+        g.drawImage(imageAc,xDelta, +310+yDelta, getWidth(), getHeight(), this);
         
         
     }

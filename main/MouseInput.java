@@ -3,6 +3,10 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 public class MouseInput implements MouseListener,MouseMotionListener{
+    private PanelGame panelgame;
+    public MouseInput(PanelGame panelame){
+        this.panelgame = panelame;
+    }
 
     @Override
     public void mouseDragged(MouseEvent e) {

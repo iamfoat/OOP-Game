@@ -53,6 +53,7 @@ public class PanelGame extends JPanel {
                 long sleepTime = (TARGET_TIME - time) / 1000000;
                 if (sleepTime > 0) {
                     sleep(sleepTime);
+                    // System.out.println(sleepTime);
                 }
             }
         });

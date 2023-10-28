@@ -1,3 +1,4 @@
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.geom.Rectangle2D;
 import java.net.URL;
@@ -10,12 +11,11 @@ class shoot extends JPanel{
     public int y;
     public int x;
     public int count=0;
-
-
+    
     public void move(){
-	this.y-=1;
+	this.y-=3;
     }
     public Rectangle2D getbound(){
-    	return (new Rectangle2D.Double(x,y,25,25));
+    	return (new Rectangle2D.Double(x,y,45,45));
     }
 }

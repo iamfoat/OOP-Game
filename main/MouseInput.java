@@ -4,23 +4,26 @@ import java.awt.event.MouseMotionListener;
 
 public class MouseInput implements MouseListener,MouseMotionListener{
     private PanelGame panelgame;
+    
     public MouseInput(PanelGame panelame){
         this.panelgame = panelame;
+
     }
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        throw new UnsupportedOperationException("Unimplemented method 'mouseDragged'");
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        System.out.println("Mouse move");
+       
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println("Mouse clicked");
+        panelgame.createShoot();
+        
+        
        }
 
     @Override

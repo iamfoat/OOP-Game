@@ -26,6 +26,8 @@ public class KeyboardInput implements KeyListener {
                 case KeyEvent.VK_W:
                     panelgame.changeYDelta(-10);
                     break;
+                case KeyEvent.VK_UP:
+                    panelgame.createShoot();
         
             
                 default:

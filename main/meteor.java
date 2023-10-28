@@ -5,11 +5,9 @@ import javax.swing.ImageIcon;
 import java.net.URL;
 import java.util.Random;
 
-class meteor{
+public class meteor implements Cloneable{
     URL imagemto = this.getClass().getResource("photo/PNG/Meteors/Meteor_05.png");
     Image imagemto1 = new ImageIcon(imagemto).getImage();
-    URL imagemtoo = this.getClass().getResource("photo/PNG/Meteors/Meteor_05.png");
-    Image imagemto2 = new ImageIcon(imagemtoo).getImage();
 
     public int y = 0;
     public int x = (int) ((Math.random() * 300) + 20);
@@ -21,39 +19,47 @@ class meteor{
         runner.start();
         
     }
-    private final int speed = 4;
+    
+    private final int speed = 3;
     public void move() {
-        y += speed;
-        if (y >= 1000) {
+        y+=speed;
+        if (y >= 1000 || x < 0 || x > 550) { 
             resetMeteor();
         }
     }
     Thread runner = new Thread(new Runnable() {
         public void run() {
-        while (true) {
-            y += speed;
-            if (y >= 1000) {
-                resetMeteor();
-            }
-
-            try {
-                Thread.sleep(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            long lastTime = System.currentTimeMillis();
+            while (true) {
+                long currentTime = System.currentTimeMillis();
+                long elapsedTime = currentTime - lastTime;
+                lastTime = currentTime;
+    
+                y += (speed * elapsedTime / 1000); // คำนวณความเร็วใหม่
+    
+                if (y >= 1000) {
+                    resetMeteor();
+                }
+    
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
-    }
 });
 private void resetMeteor() {
-        Random rand = new Random();
-        x = -rand.nextInt(1000);  
-        y = rand.nextInt(600);    
+    Random rand = new Random();
+    x = rand.nextInt(550); 
+    y = 0; 
     }
     
 
     public Image getImage() {
         return imagemto1;
     }
+    
 
     public int getX() {
         return x;
@@ -62,6 +68,7 @@ private void resetMeteor() {
     public int getY() {
         return y;
     }
+
 
     public Rectangle2D getbound() {
         return (new Rectangle2D.Double(x, y, 45, 45));

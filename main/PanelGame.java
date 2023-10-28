@@ -1,11 +1,12 @@
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 import java.net.URL;
 import javax.swing.*;
 
-public class PanelGame extends JPanel {
+public class PanelGame extends JPanel{
 
     private MouseInput mouseInput;
     private int xDelta = 0 , yDelta = 0;
@@ -16,6 +17,8 @@ public class PanelGame extends JPanel {
     private boolean running = true;
     private int FPS = 60;
     private long TARGET_TIME = 1000000000 / FPS;
+
+    
     URL imageURL = this.getClass().getResource("photo/bgspace.jpg");
     Image imageBg = new ImageIcon(imageURL).getImage();
     URL imageActorURL = this.getClass().getResource("photo/rocket.png");        

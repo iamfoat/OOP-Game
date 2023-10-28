@@ -18,6 +18,10 @@ public class Display extends JFrame{
         add(panelgame);
         panelgame.start();
         panelgame.requestFocus();
+        meteor mto = new meteor();
+        panelgame.addMeteor(mto);
+        
+
         
     }
     public static void main(String[] args){

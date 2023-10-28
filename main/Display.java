@@ -1,16 +1,17 @@
 import java.awt.*;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.net.URL;
 
 import javax.swing.*;
 
-public class Display extends JFrame{
+public class Display extends JFrame {
+   
 
 
     Display(){
         init();
-        
-        
+      
     }
 
     public void init(){
@@ -35,4 +36,6 @@ public class Display extends JFrame{
     
         
     }
+
+    
 }

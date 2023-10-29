@@ -15,16 +15,10 @@ public class KeyboardInput implements KeyListener {
         public void keyPressed(KeyEvent e) {
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_A:
-                    panelgame.changeXDelta(-10);
-                    break;
-                case KeyEvent.VK_S:
-                    panelgame.changeYDelta(10);
+                    panelgame.changeXDelta(-15);
                     break;
                 case KeyEvent.VK_D:
-                    panelgame.changeXDelta(10);
-                    break;
-                case KeyEvent.VK_W:
-                    panelgame.changeYDelta(-10);
+                    panelgame.changeXDelta(15);
                     break;
                 case KeyEvent.VK_UP:
                     panelgame.createShoot();

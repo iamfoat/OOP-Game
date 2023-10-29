@@ -2,12 +2,12 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.geom.Rectangle2D;
 import java.net.URL;
+import java.util.Random;
 
 public class bomb {
     Image imagebomb;
-    public int x = 0;
-    public int y = (int) ((Math.random() * 300) + 40);
-    public int count = 0;
+    public int y = 0;
+    public int x = (int) ((Math.random() * 300) + 40);
 
     bomb() {
         String imageLocation = "photo/PNG/Sprites/Bombs/bomb1.png";
@@ -18,21 +18,25 @@ public class bomb {
     Thread runner = new Thread(new Runnable() {
         public void run() {
             while (true) {
-                x += 1;
-                if (x >= 1100) {
-                    imagebomb = null;
-                    runner = null;
-                    x = 10;
-                    y = 10;
+                y += 1;
+                if (y >= 1000 || x < 0 || x > 550) {
+                    resetBomb();
                 }
                 try {
-                    runner.sleep(1);
+                    Thread.sleep(10); // เพิ่มหน่วงเวลานี้เพื่อทำให้ bomb ปล่อยออกมาช้าลง
                 } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
         }
     });
+    
 
+    private void resetBomb() {
+        Random rand = new Random();
+        x = rand.nextInt(550); 
+        y = 0; 
+    }
     public Image getImage() {
         return imagebomb;
     }
@@ -46,6 +50,6 @@ public class bomb {
     }
 
     public Rectangle2D getbound() {
-        return (new Rectangle2D.Double(x, y, 45, 45));
+        return (new Rectangle2D.Double(x, y, 50, 50));
     }
 }

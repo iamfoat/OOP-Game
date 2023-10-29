@@ -20,9 +20,7 @@ public class MouseInput implements MouseListener,MouseMotionListener{
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {
-        panelgame.createShoot();
-        
+    public void mouseClicked(MouseEvent e) {        
         
        }
 

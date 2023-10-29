@@ -1,8 +1,4 @@
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseListener;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
@@ -19,9 +15,11 @@ public class PanelGame extends JPanel{
     private int width;
     private int height;
     private Thread timer;
+    private Thread bombb;
     private boolean running = true;
     private int FPS = 60;
     private long TARGET_TIME = 1000000000 / FPS;
+
 
     public ArrayList<shoot> shoots = new ArrayList<shoot>();
     public int score = 0;
@@ -39,9 +37,13 @@ public class PanelGame extends JPanel{
     URL imageActorURL = this.getClass().getResource("photo/rocket.png");        
     Image imageAc = new ImageIcon(imageActorURL).getImage();
 
-    public ArrayList<bomb> bb = new ArrayList<bomb>();
 
-    
+    URL imagebb = this.getClass().getResource("photo/PNG/Meteors/Meteor_05.png");
+    Image imageBb = new ImageIcon(imagebb).getImage();
+    public ArrayList<bomb> bb = new ArrayList<bomb>();
+    public int HP = 3;
+    boolean startball = false;
+
     
 
     public PanelGame() {
@@ -51,7 +53,7 @@ public class PanelGame extends JPanel{
         addKeyListener(new KeyboardInput(this));
         addMouseListener(mouseInput); 
         addMouseMotionListener(mouseInput);    
-    
+        bomb();
 
     }
     public void changeXDelta(int value){
@@ -84,6 +86,32 @@ public class PanelGame extends JPanel{
         timer.start();
     }
 
+    public void bomb(){
+        bombb = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                while(true){
+                    try {
+                        if (startball == false) {
+                            Thread.sleep((long) (Math.random() * 10000) + 2000);
+                        }
+                    } 
+                    catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    if (startball == false) {
+                        addBomb(new bomb());
+                    }
+                }
+            }
+            
+        });
+        bombb.start();
+    }
+    
+    
+
     private void updateGame() {
         meteorReleaseTimer++;
         if (meteorReleaseTimer >= meteorReleaseInterval) {
@@ -106,7 +134,8 @@ public class PanelGame extends JPanel{
         
         if (rand.nextBoolean()) {
             newMeteor.imagemto1 = new ImageIcon(this.getClass().getResource("photo/PNG/Meteors/Meteor_05.png")).getImage();
-        } else {
+        } 
+        else {
             newMeteor.imagemto1 = new ImageIcon(this.getClass().getResource("photo/PNG/Meteors/Meteor_07.png")).getImage();
         }
         
@@ -115,17 +144,14 @@ public class PanelGame extends JPanel{
     }
 
     public void createShoot() {
-         // สร้างกระสุนใหม่
         shoot newBullet = new shoot();
-        // ตำแหน่ง x ของกระสุนใหม่เท่ากับตำแหน่ง x ของจรวด
         newBullet.x = xDelta+235;
-        // ตำแหน่ง y ให้กระสุนเริ่มต้นจากส่วนล่างของหน้าจอ
         newBullet.y = 550;
-        // เพิ่มกระสุนใหม่ลงในรายการ shoots
         shoots.add(newBullet);
-        // อัปเดตกระสุนเคลื่อนที่
         newBullet.move();
     }
+
+    
 
     private void render() {
         repaint();
@@ -139,16 +165,26 @@ public class PanelGame extends JPanel{
         mtoo.add(mto); 
     }
 
+    public void addBomb(bomb bmb) {
+        bb.add(bmb); 
+    }
+
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(imageBg, 0, 0, getWidth(), getHeight(), this);
+        //วาดจรวด
         g.drawImage(imageAc,xDelta, +310+yDelta, getWidth(), getHeight(), this);
-        
-        for (int i = 0; i < mtoo.size(); i++) {
-            meteor m = mtoo.get(i);
-            g.drawImage(m.imagemto1, m.getX(), m.getY(), 50, 50, this);
+
+        //ปล่อย meteor
+        if(!mtoo.isEmpty()){
+            for (int i = 0; i < mtoo.size(); i++) {
+                meteor m = mtoo.get(i);
+                g.drawImage(m.imagemto1, m.getX(), m.getY(), 50, 50, this);
+            }
         }
+
+        //สร้างกระสุน
         for (int i = 0; i < shoots.size(); i++) {
             shoot bullet = shoots.get(i);
             g.drawImage(bullet.imagest, bullet.x, bullet.y, 50, 50, null);
@@ -158,20 +194,40 @@ public class PanelGame extends JPanel{
                 shoots.remove(i);
             }
         }
-        for (int i = 0; i < shoots.size(); i++) {
-            for (int j = 0; j < mtoo.size(); j++) {
-                if (Intersect(shoots.get(i).getbound(), mtoo.get(j).getbound())) {
-                    mtoo.remove(j);
-                    shoots.remove(i);
-                    score += 10;
-                    g.drawString("+10", xDelta+210 , 310);
+        //กระสุนชนmeteor
+        if (!shoots.isEmpty()){
+            for (int i = 0; i < shoots.size(); i++) {
+                for (int j = 0; j < mtoo.size(); j++) {
+                    if (Intersect(shoots.get(i).getbound(), mtoo.get(j).getbound())) {
+                        mtoo.remove(j);
+                        shoots.remove(i);
+                        score += 10;
+                        g.drawString("+10", xDelta+210 , 310);
+                    }
                 }
             }
         }
-        
-        
+        //ปล่อย bomb
+        for (int i = 0; i < bb.size(); i++) {
+            bomb b = bb.get(i);
+            g.drawImage(b.imagebomb, b.getX(), b.getY(), 80, 80, this);
 
-        
+        }
+        // bomb ชนกระสุน
+        if (!shoots.isEmpty() && !bb.isEmpty()){
+            for (int i = 0; i < shoots.size(); i++) {
+                for (int j = 0; j < bb.size(); j++) {
+                    if (Intersect(shoots.get(i).getbound(), bb.get(j).getbound())) {
+                        bb.remove(j);
+                        shoots.remove(i);
+                        score -= 20;
+                        HP = HP - 1;
+                        g.drawString("-1HP", xDelta + 210, 310);
+                        g.drawString("-20", xDelta + 210, 250);
+                    }
+                }
+            }  
+        }         
     }
     public boolean Intersect(Rectangle2D a, Rectangle2D b) {
         return (a.intersects(b));

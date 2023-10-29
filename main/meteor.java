@@ -5,7 +5,7 @@ import javax.swing.ImageIcon;
 import java.net.URL;
 import java.util.Random;
 
-public class meteor implements Cloneable{
+public class meteor {
     URL imagemto = this.getClass().getResource("photo/PNG/Meteors/Meteor_05.png");
     Image imagemto1 = new ImageIcon(imagemto).getImage();
 

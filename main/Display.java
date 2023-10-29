@@ -21,6 +21,8 @@ public class Display extends JFrame {
         panelgame.requestFocus();
         meteor mto = new meteor();
         panelgame.addMeteor(mto);
+        bomb bmb = new bomb();
+        panelgame.addBomb(bmb);
         
 
         

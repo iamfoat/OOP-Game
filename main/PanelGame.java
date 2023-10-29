@@ -192,6 +192,7 @@ public class PanelGame extends JPanel{
             bullet.count++;
             if (bullet.y < 0) {
                 shoots.remove(i);
+                i--;
             }
         }
         //กระสุนชนmeteor
@@ -201,6 +202,7 @@ public class PanelGame extends JPanel{
                     if (Intersect(shoots.get(i).getbound(), mtoo.get(j).getbound())) {
                         mtoo.remove(j);
                         shoots.remove(i);
+                        i--;
                         score += 10;
                         g.drawString("+10", xDelta+210 , 310);
                     }
@@ -220,6 +222,7 @@ public class PanelGame extends JPanel{
                     if (Intersect(shoots.get(i).getbound(), bb.get(j).getbound())) {
                         bb.remove(j);
                         shoots.remove(i);
+                        i--;
                         score -= 20;
                         HP = HP - 1;
                         g.drawString("-1HP", xDelta + 210, 310);

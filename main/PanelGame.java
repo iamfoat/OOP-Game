@@ -156,7 +156,7 @@ public class PanelGame extends JPanel{
     private void render() {
         repaint();
         try {
-            Thread.sleep(10);
+            Thread.sleep(20);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

@@ -27,6 +27,9 @@ public class Display extends JFrame {
 
         
     }
+    public void actionPerformed(ActionEvent e){
+        
+    }
     public static void main(String[] args){
         Display frame = new Display();
         frame.setTitle("Desty Space");

@@ -11,7 +11,6 @@ public class meteor {
 
     public int y = 0;
     public int x = (int) ((Math.random() * 300) + 20);
-    public int count = 0;
 
     meteor(){
         x = (int) ((Math.random() * 300) + 20);
@@ -20,7 +19,7 @@ public class meteor {
         
     }
     
-    private final int speed = 3;
+    private final int speed = 4;
     public void move() {
         y+=speed;
         if (y >= 1000 || x < 0 || x > 550) { 

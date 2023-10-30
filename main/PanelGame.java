@@ -1,8 +1,11 @@
 import java.awt.*;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 import java.awt.geom.Rectangle2D;
+import java.awt.geom.Rectangle2D.Double;
+
 
 
 import javax.swing.*;
@@ -27,15 +30,17 @@ public class PanelGame extends JPanel{
     public ArrayList<meteor> mtoo = new ArrayList<meteor>();
     URL imagemto = this.getClass().getResource("photo/PNG/Meteors/Meteor_05.png");
     Image imagemto1 = new ImageIcon(imagemto).getImage();
+    Iterator<meteor> iterator = mtoo.iterator();
+
 
     private int meteorSpacing = 200;
-    private int meteorReleaseInterval = 100; 
-    private int meteorReleaseTimer = 0;
+    private int meteorInterval = 100; 
+    private int meteorTimer = 0;
 
     URL imageURL = this.getClass().getResource("photo/bgspace.jpg");
     Image imageBg = new ImageIcon(imageURL).getImage();
-    URL imageActorURL = this.getClass().getResource("photo/rocket.png");        
-    Image imageAc = new ImageIcon(imageActorURL).getImage();
+    // URL imageActorURL = this.getClass().getResource("photo/rocket.png");        
+    // Image imageAc = new ImageIcon(imageActorURL).getImage();
 
 
     URL imagebb = this.getClass().getResource("photo/PNG/Meteors/Meteor_05.png");
@@ -44,6 +49,7 @@ public class PanelGame extends JPanel{
     public int HP = 3;
     boolean startball = false;
 
+    private Rocket rocket;
     
 
     public PanelGame() {
@@ -54,6 +60,7 @@ public class PanelGame extends JPanel{
         addMouseListener(mouseInput); 
         addMouseMotionListener(mouseInput);    
         bomb();
+        rocket = new Rocket();
 
     }
     public void changeXDelta(int value){
@@ -113,9 +120,9 @@ public class PanelGame extends JPanel{
     
 
     private void updateGame() {
-        meteorReleaseTimer++;
-        if (meteorReleaseTimer >= meteorReleaseInterval) {
-            meteorReleaseTimer = 0;
+        meteorTimer++;
+        if (meteorTimer >= meteorInterval) {
+            meteorTimer = 0;
             createNewMeteor();
         }
     
@@ -174,13 +181,14 @@ public class PanelGame extends JPanel{
         super.paintComponent(g);
         g.drawImage(imageBg, 0, 0, getWidth(), getHeight(), this);
         //วาดจรวด
-        g.drawImage(imageAc,xDelta, +310+yDelta, getWidth(), getHeight(), this);
+        g.drawImage(rocket.image,xDelta, +310+yDelta, 550, 800, this);
 
         //ปล่อย meteor
         if(!mtoo.isEmpty()){
             for (int i = 0; i < mtoo.size(); i++) {
                 meteor m = mtoo.get(i);
                 g.drawImage(m.imagemto1, m.getX(), m.getY(), 50, 50, this);
+            
             }
         }
 
@@ -215,6 +223,7 @@ public class PanelGame extends JPanel{
             g.drawImage(b.imagebomb, b.getX(), b.getY(), 80, 80, this);
 
         }
+
         // bomb ชนกระสุน
         if (!shoots.isEmpty() && !bb.isEmpty()){
             for (int i = 0; i < shoots.size(); i++) {
@@ -230,8 +239,10 @@ public class PanelGame extends JPanel{
                     }
                 }
             }  
-        }         
+        }
     }
+    
+        
     public boolean Intersect(Rectangle2D a, Rectangle2D b) {
         return (a.intersects(b));
     }
@@ -244,3 +255,4 @@ public class PanelGame extends JPanel{
         }
     }
 }
+

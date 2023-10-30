@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.Random;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.Rectangle2D.Double;
+import javax.swing.*;
+
 
 
 
@@ -12,8 +14,32 @@ import javax.swing.*;
 
 public class PanelGame extends JPanel{
 
+    homepage hp = new homepage();
+    ImageIcon feildover = new ImageIcon(this.getClass().getResource("photo/5509862.jpg"));
+    ImageIcon img_paralyze = new ImageIcon(this.getClass().getResource("photo/rocket.png"));
+    ImageIcon exitover = new ImageIcon(this.getClass().getResource("photo/exist.png"));
+    ImageIcon restart = new ImageIcon(this.getClass().getResource("photo/start.png"));
+    ImageIcon Head = new ImageIcon(this.getClass().getResource("photo/head.png"));
+    JButton hh = new JButton(Head);
+    JButton BStartover = new JButton(restart);
+    JButton BExitover = new JButton(exitover);
+    // private final ImageIcon imgstate1 = new ImageIcon(this.getClass().getResource("photp/galaxy.jpg"));
+    // private final ImageIcon imgstate2 = new ImageIcon(this.getClass().getResource("s2.jpg"));
+    // private final ImageIcon imgmeleon = new ImageIcon(this.getClass().getResource("g0.png"));
+    private final ImageIcon pause = new ImageIcon(this.getClass().getResource("photo/pause.jpg"));
+    private final ImageIcon resum = new ImageIcon(this.getClass().getResource("photo/start.png"));
+    // private final ImageIcon back = new ImageIcon(this.getClass().getResource("back.png"));
+
+    private JLabel scoree = new JLabel();
+    public JButton BPause = new JButton(pause);
+    // public JButton BExithome = new JButton(back);
+    public JButton Bresum = new JButton(resum);
+        boolean timestart = true;
+
+
     private MouseInput mouseInput;
     private int xDelta = 0 , yDelta = 0;
+    public int time;
 
     private int width;
     private int height;
@@ -61,6 +87,8 @@ public class PanelGame extends JPanel{
         addMouseMotionListener(mouseInput);    
         bomb();
         rocket = new Rocket();
+        this.add(scoree);
+
 
     }
     public void changeXDelta(int value){
@@ -174,6 +202,9 @@ public class PanelGame extends JPanel{
 
     public void addBomb(bomb bmb) {
         bb.add(bmb); 
+        if (bmb.getY() > getHeight()) {
+        bb.remove(bmb);
+    }
     }
 
     @Override
@@ -213,6 +244,7 @@ public class PanelGame extends JPanel{
                         i--;
                         score += 10;
                         g.drawString("+10", xDelta+210 , 310);
+                        break;
                     }
                 }
             }
@@ -232,7 +264,7 @@ public class PanelGame extends JPanel{
                         bb.remove(j);
                         shoots.remove(i);
                         i--;
-                        score -= 20;
+                        score -= 10;
                         HP = HP - 1;
                         g.drawString("-1HP", xDelta + 210, 310);
                         g.drawString("-20", xDelta + 210, 250);
@@ -240,6 +272,10 @@ public class PanelGame extends JPanel{
                 }
             }  
         }
+        g.setFont(new Font("Hobo Std", Font.HANGING_BASELINE, 30));
+        g.setColor(Color.WHITE);
+        g.drawString("SCORE   " + score, 0, 30);
+
     }
     
         
@@ -254,5 +290,6 @@ public class PanelGame extends JPanel{
             System.out.println(ex);
         }
     }
+    
 }
 

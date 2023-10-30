@@ -13,6 +13,7 @@ public class Rocket {
         URL imageurl = this.getClass().getResource("photo/rocket.png");
         this.image = new ImageIcon(imageurl).getImage();
     }
+   
 
     public Rectangle getbound() {
         return new Rectangle(x, 310 + y, 65, 92); // ใช้ x และ y ใน Rectangle

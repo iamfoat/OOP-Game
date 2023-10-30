@@ -13,7 +13,7 @@ class shoot extends JPanel{
     public int count=0;
     
     public void move(){
-	this.y-=3;
+	this.y-=9;
     }
     public Rectangle2D getbound(){
     	return (new Rectangle2D.Double(x,y,45,45));

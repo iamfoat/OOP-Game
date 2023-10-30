@@ -19,7 +19,7 @@ public class meteor {
         
     }
     
-    private final int speed = 4;
+    private final int speed = 8;
     public void move() {
         y+=speed;
         if (y >= 1000 || x < 0 || x > 550) { 

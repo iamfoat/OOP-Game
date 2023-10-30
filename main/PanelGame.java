@@ -274,7 +274,10 @@ public class PanelGame extends JPanel{
         }
         g.setFont(new Font("Hobo Std", Font.HANGING_BASELINE, 30));
         g.setColor(Color.WHITE);
-        g.drawString("SCORE   " + score, 0, 30);
+        g.drawString("SCORE   " + score, 10, 35);
+        g.setColor(Color.green);
+        g.setFont(new Font("Hobo Std", Font.BOLD, 40));
+        g.drawString("HP : "+HP, 400, 740);
 
     }
     

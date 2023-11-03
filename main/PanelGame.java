@@ -26,7 +26,7 @@ public class PanelGame extends JPanel{
     // private final ImageIcon imgstate1 = new ImageIcon(this.getClass().getResource("photp/galaxy.jpg"));
     // private final ImageIcon imgstate2 = new ImageIcon(this.getClass().getResource("s2.jpg"));
     // private final ImageIcon imgmeleon = new ImageIcon(this.getClass().getResource("g0.png"));
-    private final ImageIcon pause = new ImageIcon(this.getClass().getResource("photo/pause.jpg"));
+    private final ImageIcon pause = new ImageIcon(this.getClass().getResource("photo/pause.png"));
     private final ImageIcon resum = new ImageIcon(this.getClass().getResource("photo/start.png"));
     // private final ImageIcon back = new ImageIcon(this.getClass().getResource("back.png"));
 

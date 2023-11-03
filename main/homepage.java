@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 public class homepage extends JPanel{
     
     private ImageIcon headIcon = new ImageIcon(this.getClass().getResource("photo/head.png"));
-    private ImageIcon feild = new ImageIcon(this.getClass().getResource("photo/5471985.png"));
+    private ImageIcon feild = new ImageIcon(this.getClass().getResource("photo/5471985.jpg"));
 	private ImageIcon starts = new ImageIcon(this.getClass().getResource("photo/start.png"));
 	private ImageIcon exit = new ImageIcon(this.getClass().getResource("photo/exist.png"));
 	public JButton BStart = new JButton(starts);

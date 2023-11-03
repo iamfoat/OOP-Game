@@ -19,8 +19,8 @@ public class homepage extends JPanel{
             add(BExit1);
             add(BStart);
             BStart.setBounds(0,450,170,90);
-            // head.setBounds(0,0,120,120);
-            // add(head);
+            head.setBounds(100,100,400,150);
+            add(head);
             
 	}
 	public void paintComponent(Graphics g){
@@ -28,6 +28,6 @@ public class homepage extends JPanel{
             g.drawImage(feild.getImage(),0,0,550,800,this);
             g.setColor(Color.WHITE);
             g.setFont(new Font("Hobo Std",Font.CENTER_BASELINE,60));		
-            g.drawString("Desty Space",100,100);	
+            // g.drawString("Desty Space",100,100);
 	}
 }

@@ -52,7 +52,7 @@ public class Display extends JFrame implements ActionListener{
             System.exit(0);
         } else if (e.getSource() == panelgame.BPause) {
             this.setLocationRelativeTo(null);
-            this.setSize(1000, 800);
+            this.setSize(550, 800);
             this.add(panelgame);
             panelgame.requestFocusInWindow();
             revalidate();
@@ -70,7 +70,5 @@ public class Display extends JFrame implements ActionListener{
     
         
     }
-    
-
     
 }

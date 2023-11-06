@@ -15,7 +15,7 @@ import javax.swing.*;
 public class PanelGame extends JPanel{
 
     homepage hp = new homepage();
-    ImageIcon feildover = new ImageIcon(this.getClass().getResource("photo/5509862.jpg"));
+    ImageIcon feildover = new ImageIcon(this.getClass().getResource("photo/bg.png"));
     ImageIcon img_paralyze = new ImageIcon(this.getClass().getResource("photo/rocket.png"));
     ImageIcon exitover = new ImageIcon(this.getClass().getResource("photo/exist.png"));
     ImageIcon restart = new ImageIcon(this.getClass().getResource("photo/start.png"));
@@ -65,12 +65,16 @@ public class PanelGame extends JPanel{
 
     URL imageURL = this.getClass().getResource("photo/bgspace.jpg");
     Image imageBg = new ImageIcon(imageURL).getImage();
+    URL imageURL2 = this.getClass().getResource("photo/galaxy.jpg");
+    Image imageBg2 = new ImageIcon(imageURL2).getImage();
+    URL imageURL3 = this.getClass().getResource("photo/over.png");
+    Image imageBg3 = new ImageIcon(imageURL3).getImage();
     // URL imageActorURL = this.getClass().getResource("photo/rocket.png");        
     // Image imageAc = new ImageIcon(imageActorURL).getImage();
 
 
     URL imagebb = this.getClass().getResource("photo/PNG/Meteors/Meteor_05.png");
-    Image imageBb = new ImageIcon(imagebb).getImage();
+    Image imageBb = new ImageIcon(imagebb).getImage();  
     public ArrayList<bomb> bb = new ArrayList<bomb>();
     public int HP = 3;
     boolean startball = false;
@@ -211,8 +215,17 @@ public class PanelGame extends JPanel{
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(imageBg, 0, 0, getWidth(), getHeight(), this);
+        if(score >= 20){
+            g.drawImage(imageBg2, 0, 0, getWidth(), getHeight(), this);
+        }
+        else{
+           g.drawImage(imageBg, 0, 0, getWidth(), getHeight(), this); 
+        }
         //วาดจรวด
-        g.drawImage(rocket.image,xDelta, +310+yDelta, 550, 800, this);
+        g.drawImage(rocket.image,xDelta, 310+yDelta, 550, 800, this);
+        // g.setColor(Color.RED);
+        // g.drawRect(220+xDelta, 615+yDelta, 100, 158);
+
 
         //ปล่อย meteor
         if(!mtoo.isEmpty()){
@@ -249,6 +262,27 @@ public class PanelGame extends JPanel{
                 }
             }
         }
+        if(HP<=0){
+            g.drawImage(imageBg3, 0, 0, getWidth(), getHeight(), this);
+            
+        }
+
+        //จรวดชนmeteor
+        for (int i = 0; i < mtoo.size(); i++) {
+            if(Intersect(mtoo.get(i).getbound(),getbound())){
+                mtoo.remove(i);
+                HP -= 1;
+            }
+        }
+
+        //จรวดชนbb
+        for (int i = 0; i < bb.size(); i++) {
+            if(Intersect(bb.get(i).getbound(),getbound())){
+                bb.remove(i);
+                HP -= 1;
+            }
+        }
+
         //ปล่อย bomb
         for (int i = 0; i < bb.size(); i++) {
             bomb b = bb.get(i);
@@ -284,6 +318,10 @@ public class PanelGame extends JPanel{
         
     public boolean Intersect(Rectangle2D a, Rectangle2D b) {
         return (a.intersects(b));
+    }
+
+    public Rectangle2D getbound(){
+    	return (new Rectangle2D.Double(220+xDelta, 615+yDelta,100,158));
     }
 
     public static void sleep(long sleepTime) {

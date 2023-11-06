@@ -214,7 +214,7 @@ public class PanelGame extends JPanel{
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(imageBg, 0, 0, getWidth(), getHeight(), this);
+        // g.drawImage(imageBg, 0, 0, getWidth(), getHeight(), this);
         if(score >= 20){
             g.drawImage(imageBg2, 0, 0, getWidth(), getHeight(), this);
         }
@@ -284,10 +284,12 @@ public class PanelGame extends JPanel{
         }
 
         //ปล่อย bomb
-        for (int i = 0; i < bb.size(); i++) {
-            bomb b = bb.get(i);
-            g.drawImage(b.imagebomb, b.getX(), b.getY(), 80, 80, this);
+        if(HP>0){
+            for (int i = 0; i < bb.size(); i++) {
+                bomb b = bb.get(i);
+                g.drawImage(b.imagebomb, b.getX(), b.getY(), 80, 80, this);
 
+            }
         }
 
         // bomb ชนกระสุน
@@ -298,8 +300,9 @@ public class PanelGame extends JPanel{
                         bb.remove(j);
                         shoots.remove(i);
                         i--;
-                        score -= 10;
-                        HP = HP - 1;
+                        if(score>0){
+                            score -= 10;
+                        }
                         g.drawString("-1HP", xDelta + 210, 310);
                         g.drawString("-20", xDelta + 210, 250);
                     }
@@ -308,10 +311,12 @@ public class PanelGame extends JPanel{
         }
         g.setFont(new Font("Hobo Std", Font.HANGING_BASELINE, 30));
         g.setColor(Color.WHITE);
-        g.drawString("SCORE   " + score, 10, 35);
-        g.setColor(Color.green);
-        g.setFont(new Font("Hobo Std", Font.BOLD, 40));
-        g.drawString("HP : "+HP, 400, 740);
+        if(HP>0){
+            g.drawString("SCORE   " + score, 10, 35);
+            g.setColor(Color.green);
+            g.setFont(new Font("Hobo Std", Font.BOLD, 40));
+            g.drawString("HP : "+HP, 400, 740);
+        }
 
     }
     

@@ -12,19 +12,28 @@ public class homepage extends JPanel{
 	private ImageIcon exit = new ImageIcon(this.getClass().getResource("photo/exist.png"));
 	public JButton BStart = new JButton(starts);
 	public JButton BExit1  = new JButton(exit);
+    public boolean p_alive = true;
     // public JButton head = new JButton(headIcon);
 	homepage(){
             setLayout(null);
             BExit1.setBounds(180, 550, 170,90);
             add(BExit1);
+            BExit1.setBackground(new Color(0, 0, 0, 0));
+            BExit1.setBorderPainted(false); // ปิดการวาดเส้นขอบ
+            BExit1.setFocusPainted(false);
+            BExit1.setContentAreaFilled(false);
             add(BStart);
+            BStart.setBackground(new Color(0, 0, 0, 0));
+            BStart.setBorderPainted(false); // ปิดการวาดเส้นขอบ
+            BStart.setFocusPainted(false);
+            BStart.setContentAreaFilled(false); 
             BStart.setBounds(180,350,170,90);     
 	}
 	public void paintComponent(Graphics g){
             super.paintComponent(g);
             g.drawImage(feild.getImage(),0,0,550,800,this);
             g.setColor(Color.WHITE);
-            g.setFont(new Font("Hobo Std",Font.CENTER_BASELINE,60));		
+            g.setFont(new Font("2005_iannnnnTKO",Font.CENTER_BASELINE,60));		
             // g.drawString("Desty Space",100,100);
 	}
 }

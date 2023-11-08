@@ -31,6 +31,7 @@ public class Display extends JFrame implements ActionListener{
         homepage1.BStart.addActionListener(this);
         panelgame.BPause.addActionListener(this);
         panelgame.Bresum.addActionListener(this);
+        panelgame.Brep.addActionListener(this);
         
 
         
@@ -56,6 +57,15 @@ public class Display extends JFrame implements ActionListener{
             this.add(panelgame);
             panelgame.requestFocusInWindow();
             revalidate();
+        }
+        else if(e.getSource() == panelgame.Brep){
+            panelgame.Brep.setVisible(false);            
+            this.remove(panelgame);
+            this.add(homepage1);
+            this.remove(panelgame.Brep);
+            homepage1.revalidate();
+            homepage1.repaint();
+
         }
     }
     public static void main(String[] args){

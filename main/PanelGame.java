@@ -20,9 +20,11 @@ public class PanelGame extends JPanel{
     ImageIcon exitover = new ImageIcon(this.getClass().getResource("photo/exist.png"));
     ImageIcon restart = new ImageIcon(this.getClass().getResource("photo/start.png"));
     ImageIcon Head = new ImageIcon(this.getClass().getResource("photo/head.png"));
+    ImageIcon rep = new ImageIcon(this.getClass().getResource("photo/replay.png"));
     JButton hh = new JButton(Head);
     JButton BStartover = new JButton(restart);
     JButton BExitover = new JButton(exitover);
+    JButton Brep = new JButton(rep);
     // private final ImageIcon imgstate1 = new ImageIcon(this.getClass().getResource("photp/galaxy.jpg"));
     // private final ImageIcon imgstate2 = new ImageIcon(this.getClass().getResource("s2.jpg"));
     // private final ImageIcon imgmeleon = new ImageIcon(this.getClass().getResource("g0.png"));
@@ -48,6 +50,7 @@ public class PanelGame extends JPanel{
     private boolean running = true;
     private int FPS = 60;
     private long TARGET_TIME = 1000000000 / FPS;
+    
 
 
     public ArrayList<shoot> shoots = new ArrayList<shoot>();
@@ -215,7 +218,7 @@ public class PanelGame extends JPanel{
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         // g.drawImage(imageBg, 0, 0, getWidth(), getHeight(), this);
-        if(score >= 20){
+        if(score >= 50){
             g.drawImage(imageBg2, 0, 0, getWidth(), getHeight(), this);
         }
         else{
@@ -264,6 +267,15 @@ public class PanelGame extends JPanel{
         }
         if(HP<=0){
             g.drawImage(imageBg3, 0, 0, getWidth(), getHeight(), this);
+            g.setFont(new Font("Hobo Std", Font.BOLD, 50));
+            g.setColor(Color.white);
+            g.drawString("SCORE   " + score, 125, 400);
+            Brep.setBounds(180, 500, 170,90);
+            add(Brep);
+            Brep.setBackground(new Color(0, 0, 0, 0));
+            Brep.setBorderPainted(false); // ปิดการวาดเส้นขอบ
+            Brep.setFocusPainted(false);
+            Brep.setContentAreaFilled(false);
             
         }
 
@@ -288,7 +300,6 @@ public class PanelGame extends JPanel{
             for (int i = 0; i < bb.size(); i++) {
                 bomb b = bb.get(i);
                 g.drawImage(b.imagebomb, b.getX(), b.getY(), 80, 80, this);
-
             }
         }
 

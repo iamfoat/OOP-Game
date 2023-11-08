@@ -5,11 +5,11 @@ import java.net.URL;
 import java.util.Random;
 
 public class bomb {
-    Image imagebomb;
+    private Image imagebomb;
     public int y = 0;
     public int x = (int) ((Math.random() * 300) + 40);
 
-    bomb() {
+    public bomb() {
         String imageLocation = "photo/PNG/Sprites/Bombs/bomb1.png";
         URL imageURL1 = this.getClass().getResource(imageLocation);
         imagebomb = Toolkit.getDefaultToolkit().getImage(imageURL1);

@@ -1,20 +1,14 @@
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.URL;
-
 import javax.swing.*;
 
 public class Display extends JFrame implements ActionListener{
-    PanelGame panelgame = new PanelGame();
-    homepage homepage1 = new homepage();
+    private PanelGame panelgame = new PanelGame();
+    private homepage homepage1 = new homepage();
 
 
-    Display(){
-        // panelgame.BExithome.addActionListener(this);
-        
+    public Display(){        
         init();
-      
     }
 
     public void init(){

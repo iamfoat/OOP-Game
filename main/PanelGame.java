@@ -4,42 +4,29 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 import java.awt.geom.Rectangle2D;
-import java.awt.geom.Rectangle2D.Double;
-import javax.swing.*;
-
-
-
-
 import javax.swing.*;
 
 public class PanelGame extends JPanel{
 
-    homepage hp = new homepage();
-    ImageIcon feildover = new ImageIcon(this.getClass().getResource("photo/bg.png"));
-    ImageIcon img_paralyze = new ImageIcon(this.getClass().getResource("photo/rocket.png"));
-    ImageIcon exitover = new ImageIcon(this.getClass().getResource("photo/exist.png"));
-    ImageIcon restart = new ImageIcon(this.getClass().getResource("photo/start.png"));
-    ImageIcon Head = new ImageIcon(this.getClass().getResource("photo/head.png"));
-    ImageIcon rep = new ImageIcon(this.getClass().getResource("photo/replay.png"));
-    JButton hh = new JButton(Head);
-    JButton BStartover = new JButton(restart);
-    JButton BExitover = new JButton(exitover);
-    JButton Brep = new JButton(rep);
-    // private final ImageIcon imgstate1 = new ImageIcon(this.getClass().getResource("photp/galaxy.jpg"));
-    // private final ImageIcon imgstate2 = new ImageIcon(this.getClass().getResource("s2.jpg"));
-    // private final ImageIcon imgmeleon = new ImageIcon(this.getClass().getResource("g0.png"));
-    private final ImageIcon pause = new ImageIcon(this.getClass().getResource("photo/pause.png"));
-    private final ImageIcon resum = new ImageIcon(this.getClass().getResource("photo/start.png"));
-    // private final ImageIcon back = new ImageIcon(this.getClass().getResource("back.png"));
+    public homepage hp = new homepage();
+    private ImageIcon exitover = new ImageIcon(this.getClass().getResource("photo/exist.png"));
+    private ImageIcon restart = new ImageIcon(this.getClass().getResource("photo/start.png"));
+    private ImageIcon Head = new ImageIcon(this.getClass().getResource("photo/head.png"));
+    private ImageIcon rep = new ImageIcon(this.getClass().getResource("photo/replay.png"));
+    public JButton hh = new JButton(Head);
+    public JButton BStartover = new JButton(restart);
+    public JButton BExitover = new JButton(exitover);
+    public JButton Brep = new JButton(rep);
+    
+    private ImageIcon pause = new ImageIcon(this.getClass().getResource("photo/pause.png"));
+    private ImageIcon resum = new ImageIcon(this.getClass().getResource("photo/start.png"));
 
     private JLabel scoree = new JLabel();
     public JButton BPause = new JButton(pause);
-    // public JButton BExithome = new JButton(back);
     public JButton Bresum = new JButton(resum);
-        boolean timestart = true;
+    public boolean timestart = true;
 
 
-    private MouseInput mouseInput;
     private int xDelta = 0 , yDelta = 0;
     public int time;
 
@@ -52,35 +39,25 @@ public class PanelGame extends JPanel{
     private long TARGET_TIME = 1000000000 / FPS;
     
 
-
     public ArrayList<shoot> shoots = new ArrayList<shoot>();
     public int score = 0;
 
     public ArrayList<meteor> mtoo = new ArrayList<meteor>();
-    URL imagemto = this.getClass().getResource("photo/PNG/Meteors/Meteor_05.png");
-    Image imagemto1 = new ImageIcon(imagemto).getImage();
     Iterator<meteor> iterator = mtoo.iterator();
 
-
-    private int meteorSpacing = 200;
-    private int meteorInterval = 100; 
     private int meteorTimer = 0;
 
-    URL imageURL = this.getClass().getResource("photo/bgspace.jpg");
-    Image imageBg = new ImageIcon(imageURL).getImage();
-    URL imageURL2 = this.getClass().getResource("photo/galaxy.jpg");
-    Image imageBg2 = new ImageIcon(imageURL2).getImage();
-    URL imageURL3 = this.getClass().getResource("photo/over.png");
-    Image imageBg3 = new ImageIcon(imageURL3).getImage();
-    // URL imageActorURL = this.getClass().getResource("photo/rocket.png");        
-    // Image imageAc = new ImageIcon(imageActorURL).getImage();
+    private URL imageURL = this.getClass().getResource("photo/bgspace.jpg");
+    private Image imageBg = new ImageIcon(imageURL).getImage();
+    private URL imageURL2 = this.getClass().getResource("photo/bfchange.jpg");
+    private Image imageBg2 = new ImageIcon(imageURL2).getImage();
+    private URL imageURL3 = this.getClass().getResource("photo/over.png");
+    private Image imageBg3 = new ImageIcon(imageURL3).getImage();
 
 
-    URL imagebb = this.getClass().getResource("photo/PNG/Meteors/Meteor_05.png");
-    Image imageBb = new ImageIcon(imagebb).getImage();  
     public ArrayList<bomb> bb = new ArrayList<bomb>();
     public int HP = 3;
-    boolean startball = false;
+    public boolean startball = false;
 
     private Rocket rocket;
     
@@ -88,14 +65,10 @@ public class PanelGame extends JPanel{
     public PanelGame() {
         this.setFocusable(true);
         this.setLayout(null);
-        mouseInput = new MouseInput(this);
         addKeyListener(new KeyboardInput(this));
-        addMouseListener(mouseInput); 
-        addMouseMotionListener(mouseInput);    
         bomb();
         rocket = new Rocket();
         this.add(scoree);
-
 
     }
     public void changeXDelta(int value){
@@ -121,7 +94,6 @@ public class PanelGame extends JPanel{
                 long sleepTime = (TARGET_TIME - time) / 1000000;
                 if (sleepTime > 0) {
                     sleep(sleepTime);
-                    // System.out.println(sleepTime);
                 }
             }
         });
@@ -151,12 +123,11 @@ public class PanelGame extends JPanel{
         });
         bombb.start();
     }
-    
-    
+      
 
     private void updateGame() {
         meteorTimer++;
-        if (meteorTimer >= meteorInterval) {
+        if (meteorTimer >= 100) {
             meteorTimer = 0;
             createNewMeteor();
         }
@@ -170,7 +141,7 @@ public class PanelGame extends JPanel{
     }
     private void createNewMeteor() {
         meteor newMeteor = new meteor();
-        newMeteor.x = (int) (Math.random() * (getWidth() - meteorSpacing));
+        newMeteor.x = (int) (Math.random() * (getWidth() - 200));
         newMeteor.y = 0;
         Random rand = new Random();
         
@@ -217,18 +188,15 @@ public class PanelGame extends JPanel{
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        // g.drawImage(imageBg, 0, 0, getWidth(), getHeight(), this);
         if(score >= 50){
             g.drawImage(imageBg2, 0, 0, getWidth(), getHeight(), this);
         }
         else{
            g.drawImage(imageBg, 0, 0, getWidth(), getHeight(), this); 
         }
+
         //วาดจรวด
         g.drawImage(rocket.image,xDelta, 310+yDelta, 550, 800, this);
-        // g.setColor(Color.RED);
-        // g.drawRect(220+xDelta, 615+yDelta, 100, 158);
-
 
         //ปล่อย meteor
         if(!mtoo.isEmpty()){
@@ -250,6 +218,7 @@ public class PanelGame extends JPanel{
                 i--;
             }
         }
+
         //กระสุนชนmeteor
         if (!shoots.isEmpty()){
             for (int i = 0; i < shoots.size(); i++) {
@@ -265,9 +234,10 @@ public class PanelGame extends JPanel{
                 }
             }
         }
+
         if(HP<=0){
             g.drawImage(imageBg3, 0, 0, getWidth(), getHeight(), this);
-            g.setFont(new Font("Hobo Std", Font.BOLD, 50));
+            g.setFont(new Font("2005_iannnnnTKO", Font.BOLD, 50));
             g.setColor(Color.white);
             g.drawString("SCORE   " + score, 125, 400);
             Brep.setBounds(180, 500, 170,90);

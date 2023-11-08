@@ -6,13 +6,13 @@ import java.net.URL;
 import java.util.Random;
 
 public class meteor {
-    URL imagemto = this.getClass().getResource("photo/PNG/Meteors/Meteor_05.png");
-    Image imagemto1 = new ImageIcon(imagemto).getImage();
+    private URL imagemto = this.getClass().getResource("photo/PNG/Meteors/Meteor_05.png");
+    private Image imagemto1 = new ImageIcon(imagemto).getImage();
 
     public int y = 0;
     public int x = (int) ((Math.random() * 300) + 20);
 
-    meteor(){
+    public meteor(){
         x = (int) ((Math.random() * 300) + 20);
         y = 0;
         runner.start();

@@ -5,8 +5,8 @@ import java.awt.geom.Rectangle2D;
 
 
 public class Rocket {
-    private int x = 0; // กำหนดค่าเริ่มต้นของ x
-    private int y = 0; // กำหนดค่าเริ่มต้นของ y
+    public int x = 0; // กำหนดค่าเริ่มต้นของ x
+    public int y = 0; // กำหนดค่าเริ่มต้นของ y
     public Image image;
 
     public Rocket() {

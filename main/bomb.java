@@ -5,7 +5,7 @@ import java.net.URL;
 import java.util.Random;
 
 public class bomb {
-    private Image imagebomb;
+    public Image imagebomb;
     public int y = 0;
     public int x = (int) ((Math.random() * 300) + 40);
 

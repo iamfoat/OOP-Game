@@ -6,8 +6,8 @@ import java.net.URL;
 import java.util.Random;
 
 public class meteor {
-    private URL imagemto = this.getClass().getResource("photo/PNG/Meteors/Meteor_05.png");
-    private Image imagemto1 = new ImageIcon(imagemto).getImage();
+    public URL imagemto = this.getClass().getResource("photo/PNG/Meteors/Meteor_05.png");
+    public Image imagemto1 = new ImageIcon(imagemto).getImage();
 
     public int y = 0;
     public int x = (int) ((Math.random() * 300) + 20);

@@ -7,7 +7,7 @@ import java.awt.geom.Rectangle2D;
 public class Rocket {
     private int x = 0; // กำหนดค่าเริ่มต้นของ x
     private int y = 0; // กำหนดค่าเริ่มต้นของ y
-    private Image image;
+    public Image image;
 
     public Rocket() {
         URL imageurl = this.getClass().getResource("photo/rocket.png");

@@ -7,7 +7,7 @@ import javax.swing.*;
 
 class shoot extends JPanel{
     private URL imageshoot = this.getClass().getResource("photo/PNG/bomb/shoot.png");
-    private Image imagest = new ImageIcon(imageshoot).getImage();
+    public Image imagest = new ImageIcon(imageshoot).getImage();
     public int y;
     public int x;
     public int count=0;

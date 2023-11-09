@@ -12,9 +12,11 @@ class shoot extends JPanel{
     public int x;
     public int count=0;
     
+    //คำนวณตำแหน่ง y ทำให้กระสุนเคลื่อนที่ขึ้นไปด้านบนจอ
     public void move(){
 	this.y-=9;
     }
+    
     public Rectangle2D getbound(){
     	return (new Rectangle2D.Double(x,y,45,45));
     }

@@ -12,6 +12,7 @@ public class meteor {
     public int y = 0;
     public int x = (int) ((Math.random() * 300) + 20);
 
+    //กำหนดตำแหน่งเริ่มต้น
     public meteor(){
         x = (int) ((Math.random() * 300) + 20);
         y = 0;
@@ -22,6 +23,7 @@ public class meteor {
     private final int speed = 8;
     public void move() {
         y+=speed;
+        //อยู่นอกนอกขอบจอ หรือชนขอบทางซ้าย หรือชนขอบทางขวา จะทำการรีเซ็ตตำแหน่ง
         if (y >= 1000 || x < 0 || x > 550) { 
             resetMeteor();
         }
@@ -31,7 +33,10 @@ public class meteor {
             long lastTime = System.currentTimeMillis();
             while (true) {
                 long currentTime = System.currentTimeMillis();
+
+                //คำนวณเวลาผ่านไปแต่ละรอบloop
                 long elapsedTime = currentTime - lastTime;
+                
                 lastTime = currentTime;
     
                 y += (speed * elapsedTime / 1000); // คำนวณความเร็วใหม่
@@ -41,6 +46,7 @@ public class meteor {
                 }
     
                 try {
+                    //เพื่อไม่ให้loopทำงานเร็วเกินไป
                     Thread.sleep(10);
                 } catch (InterruptedException e) {
                     e.printStackTrace();

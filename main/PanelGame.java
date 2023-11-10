@@ -100,9 +100,9 @@ public class PanelGame extends JPanel{
         timer.start();
     }
 
+    //สุ่มปล่อย bomb
     public void bomb(){
         bombb = new Thread(new Runnable() {
-
             @Override
             public void run() {
                 while(true){
@@ -114,8 +114,10 @@ public class PanelGame extends JPanel{
                     catch (InterruptedException e) {
                         e.printStackTrace();
                     }
+                    
                     if (startball == false) {
                         addBomb(new bomb());
+                        
                     }
                 }
             }
